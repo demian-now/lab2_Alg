@@ -1,0 +1,5 @@
+﻿  Lab2.cpp
+C:\Users\fastf\Desktop\ПРОГА\3 cеместр\ЛР2\Lab2\Lab2.cpp(49,28): warning C4267: =: преобразование из "size_t" в "char"; возможна потеря данных
+C:\Users\fastf\Desktop\ПРОГА\3 cеместр\ЛР2\Lab2\Lab2.cpp(169,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\fastf\Desktop\ПРОГА\3 cеместр\ЛР2\Lab2\Lab2.cpp(165): warning C4715: BinarySearch: значение возвращается не при всех путях выполнения
+  Lab2.vcxproj -> C:\Users\fastf\Desktop\ПРОГА\3 cеместр\ЛР2\Lab2\Debug\Lab2.exe
