@@ -9,8 +9,7 @@ namespace UnitTest
 	TEST_CLASS(UnitTest)
 	{
 	public:
-		
-		TEST_METHOD(issorted_true)
+		TEST_METHOD(issorted_true_without_equal_elem)
 		{
 			const size_t size = 5;
 			int test[size] = { 0,1,2,3,4 };
@@ -21,6 +20,12 @@ namespace UnitTest
 			const size_t size = 5;
 			int test[size] = { 0,1,20,3,4 };
 			Assert::AreEqual(issorted(test, size), false);
+		}
+		TEST_METHOD(issorted_true_with_equal_elem)
+		{
+			const size_t size = 5;
+			int test[size] = { 0,1,2,4,4 };
+			Assert::AreEqual(issorted(test, size), true);
 		}
 		TEST_METHOD(issorted_char_true)
 		{
@@ -69,6 +74,34 @@ namespace UnitTest
 			CountingSort(test, size);
 			Assert::AreEqual(issorted_char(test,size), true);
 		}
+		TEST_METHOD(BogoSort_Test_with_equal_elem)
+		{
+			const size_t size = 5;
+			int test[size] = { 20,1,20,3,4 };
+			bogoSort(test, size);
+			Assert::AreEqual(issorted(test, size), true);
+		}
+		TEST_METHOD(BubbleSort_Test_with_equal_elem)
+		{
+			const size_t size = 5;
+			int test[size] = { 20,1,20,3,4 };
+			BubbleSort(test, size);
+			Assert::AreEqual(issorted(test, size), true);
+		}
+		TEST_METHOD(QuickSort_Test_with_equal_elem)
+		{
+			const size_t size = 5;
+			int test[size] = { 20,1,20,3,4 };
+			QuickSort(test, size);
+			Assert::AreEqual(issorted(test, size), true);
+		}
+		TEST_METHOD(InsertionSort_Test_with_equal_elem)
+		{
+			const size_t size = 5;
+			int test[size] = { 20,1,20,3,4 };
+			InsertionSort(test, size);
+			Assert::AreEqual(issorted(test, size), true);
+		}
 		TEST_METHOD(BinarySearch_NotSortedArray)
 		{
 			const size_t size = 5;
@@ -79,14 +112,13 @@ namespace UnitTest
 			}
 			catch (const char* error)
 			{
-				Assert::AreEqual(error, "The array is not sorted");
+				Assert::AreEqual(error, "This array is not sorted");
 			}
 		}
 		TEST_METHOD(BinarySearch_ErrorKey)
 		{
 			const size_t size = 5;
 			int test[size] = { 0,1,2,3,4 };
-			BinarySearch(test, size, 1);
 			try {
 				BinarySearch(test, size, 5);
 			}
@@ -99,7 +131,7 @@ namespace UnitTest
 		{
 			const size_t size = 5, correct_index = 2;
 			int test[size] = { 1,3,5,7,9 };
-			Assert::AreEqual(BinarySearch(test, size, 5),correct_index);
+			Assert::AreEqual(BinarySearch(test, size, 5), correct_index);
 		}
 	};
 }
