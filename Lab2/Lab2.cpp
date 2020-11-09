@@ -32,10 +32,9 @@ int* Get_Rand_Array_Char(size_t size)
 	return array;
 }
 
-double CountingSort(char* array, size_t size)
+void CountingSort(char* array, size_t size)
 {
 	const size_t max_value = 256;
-	clock_t time_test = clock();
 	int temp_array[max_value];
 	for (size_t i = 0; i < max_value; i++)
 		temp_array[i] = 0;
@@ -50,13 +49,10 @@ double CountingSort(char* array, size_t size)
 			control++;
 		}
 	}
-	time_test = clock() - time_test;
-	return ((double)time_test / CLOCKS_PER_SEC * 1000);
 }
 
-double InsertionSort(int* array, size_t size)
+void InsertionSort(int* array, size_t size)
 {
-	clock_t time_test = clock();
 	int key, temp;
 	for (size_t i = 1; i < size; i++)
 	{
@@ -69,8 +65,6 @@ double InsertionSort(int* array, size_t size)
 			temp--;
 		}
 	}
-	time_test = clock() - time_test;
-	return ((double)time_test / CLOCKS_PER_SEC * 1000);
 }
 
 void Print_Array(int *array, size_t size)
@@ -80,9 +74,8 @@ void Print_Array(int *array, size_t size)
 	cout << endl;
 }
 
-double BubbleSort(int *array, size_t size)
+void BubbleSort(int *array, size_t size)
 {
-	clock_t time_test = clock();
 	int control;
 	for (size_t i = 0; i < size; i++)
 	{
@@ -96,8 +89,6 @@ double BubbleSort(int *array, size_t size)
 		if (control == 0)
 			break;
 	}
-	time_test = clock() - time_test;
-    return ((double)time_test*1000/CLOCKS_PER_SEC);
 }
 
 bool issorted(int* array, size_t size)
@@ -116,19 +107,15 @@ bool issorted_char(char* array, size_t size)
 	return true;
 }
 
-double bogoSort(int* array, size_t size)
+void bogoSort(int* array, size_t size)
 {
-	clock_t time_test = clock();
 	while (!issorted(array, size))
 		for (size_t i = 0; i < size; i++)
 			swap(array[i], array[rand() % size]);
-	time_test = clock() - time_test;
-	return ((double)time_test *1000 / CLOCKS_PER_SEC);
 }
 
-double QuickSort(int* array, int size) 
+void QuickSort(int* array, int size) 
 {
-	clock_t time_test = clock();
 	int i = 0, j = size - 1, mid = array[size / 2];
 	do {
 		while (array[i] < mid) i++;
@@ -141,8 +128,6 @@ double QuickSort(int* array, int size)
 	} while (i <= j);
 	if (j > 0) QuickSort(array, j + 1);
 	if (i < size) QuickSort(&array[i], size - i);
-	time_test = clock() - time_test;
-	return ((double)time_test*1000 / CLOCKS_PER_SEC);
 }
 
 size_t BinarySearch(int* array, size_t size, int key)
@@ -176,7 +161,7 @@ int main()
 {
 	srand(time(0));
 	int size = 10; 
-	int* test;
+	int* test; clock_t time_test;
 	cout << "Result for QuickSort: " << endl;
 	double temp_array[10];
 	for (int i = 0; i < 5; i++)
@@ -184,21 +169,15 @@ int main()
 		for (int j = 0; j < 10; j++)
 		{
 			test = Get_Rand_Array_Int(size);
-			temp_array[j] =  QuickSort(test, size);
+			time_test = clock();
+			QuickSort(test, size);
+			time_test = clock() - time_test;
+			temp_array[j] = ((double)time_test * 1000 / CLOCKS_PER_SEC);
 			cout << temp_array[j] <<" ";
 			delete[] test;
 		}
 		cout << "for " << size << " elements. " << " Average: " << average(temp_array) << endl;
 		size *= 10;
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		size = 10;
-		test = Get_Rand_Array_Char(size);
-		Print_Array(test, size);
-		InsertionSort(test, size);
-		Print_Array(test, size);
-		delete[] test;
 	}
 	size = 10;
 	cout << "Result for BubbleSort: " << endl;
@@ -207,7 +186,10 @@ int main()
 		for (int j = 0; j < 10; j++)
 		{
 			test = Get_Rand_Array_Int(size);
-			temp_array[j] = BubbleSort(test, size);
+			time_test = clock();
+			BubbleSort(test, size);
+			time_test = clock() - time_test;
+			temp_array[j] = ((double)time_test * 1000 / CLOCKS_PER_SEC);
 			cout << temp_array[j] << " ";
 			delete[] test;
 		}
